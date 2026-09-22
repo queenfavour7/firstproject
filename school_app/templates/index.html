@@ -1,0 +1,680 @@
+{% extends "base.html" %}
+{% load tailwind_tags%}
+{% load static %}
+{% tailwind_css%}
+
+{% block content  %}
+<style>
+/* =========================================
+   RESET
+========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-radius;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+  min-height: calc(100vh - 82px);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 70px 70px 90px;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: 60px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding-left: max(0px, calc((100vw - 1180px) / 2 - 70px));
+}
+
+.hero-label,
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #77736c;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.label-dot {
+  width: 6px;
+  height: 6px;
+  background: #a76a38;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.hero h1 {
+  max-width: 650px;
+  margin-top: 25px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(50px, 5.5vw, 82px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -3px;
+}
+
+.hero h1 span {
+  display: block;
+  color: #a76a38;
+  font-style: italic;
+}
+
+.hero-description {
+  max-width: 490px;
+  margin-top: 28px;
+  color: #6e6b65;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.btn {
+  min-height: 52px;
+  padding: 0 23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn-dark {
+  background: #171717;
+  color: #fff;
+}
+
+.btn-dark:hover {
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+.btn-light {
+  border: 1px solid #d6d2ca;
+  background: transparent;
+  color: #171717;
+}
+
+.btn-light:hover {
+  background: #ebe8e2;
+}
+
+.arrow {
+  font-size: 18px;
+  transition: transform 0.25s ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   TRUST STATS
+========================================= */
+
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  margin-top: 55px;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trust-item strong {
+  font-family: "Playfair Display", serif;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.trust-item span {
+  color: #88847d;
+  font-size: 10px;
+}
+
+
+/* =========================================
+   HERO VISUAL
+========================================= */
+
+.hero-visual {
+  position: relative;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-main {
+  position: relative;
+  width: min(560px, 100%);
+  height: 620px;
+  border-radius: 300px 300px 30px 30px;
+  background:
+    linear-gradient(
+      145deg,
+      #ded8cf 0%,
+      #c5bbb0 45%,
+      #a99b8d 100%
+    );
+  overflow: hidden;
+  box-shadow:
+    0 35px 70px rgba(74, 59, 44, 0.16);
+}
+
+.hero-image-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(255,255,255,.45),
+      transparent 28%
+    ),
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.12),
+      transparent
+    );
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.shape-one {
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 244, 229, 0.35);
+  top: 90px;
+  right: -50px;
+}
+
+.shape-two {
+  width: 120px;
+  height: 120px;
+  background: rgba(102, 75, 53, 0.16);
+  bottom: 50px;
+  left: -30px;
+}
+
+
+/* =========================================
+   FLOATING CARDS
+========================================= */
+
+.floating-card {
+  position: absolute;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.91);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(54, 42, 30, 0.12);
+  border-radius: 12px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.card-one {
+  left: -35px;
+  top: 150px;
+  padding: 15px 20px;
+}
+
+.card-one span {
+  color: #b27945;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.card-one strong {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.card-two {
+  right: -25px;
+  bottom: 115px;
+  padding: 16px 21px;
+  animation-delay: -2s;
+}
+
+.card-two small {
+  color: #8a867e;
+  font-size: 9px;
+}
+
+.card-two strong {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+}
+
+
+/* =========================================
+   ABSTRACT MODEL
+========================================= */
+
+.hero-model {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 390px;
+  height: 580px;
+  transform: translateX(-50%);
+}
+
+.model-circle {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 40px;
+  left: 45px;
+  border-radius: 50%;
+  background: rgba(236, 227, 215, 0.55);
+}
+
+.model-head {
+  position: absolute;
+  z-index: 3;
+  top: 80px;
+  left: 143px;
+  width: 105px;
+  height: 130px;
+  border-radius: 48% 48% 45% 45%;
+  background:
+    linear-gradient(
+      120deg,
+      #a87858,
+      #d3a17c 60%,
+      #99694f
+    );
+  box-shadow: inset -14px -5px 25px rgba(73, 39, 25, 0.12);
+}
+
+.model-head::before {
+  content: "";
+  position: absolute;
+  width: 118px;
+  height: 80px;
+  top: -25px;
+  left: -7px;
+  border-radius: 70% 60% 20% 30%;
+  background: #3d3029;
+}
+
+.model-body {
+  position: absolute;
+  z-index: 2;
+  left: 72px;
+  bottom: -10px;
+  width: 250px;
+  height: 380px;
+}
+
+.model-neck {
+  position: absolute;
+  top: 25px;
+  left: 98px;
+  width: 60px;
+  height: 75px;
+  background: #b77e5e;
+}
+
+.model-shirt {
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  width: 190px;
+  height: 300px;
+  background:
+    linear-gradient(
+      105deg,
+      #292522,
+      #403a35 50%,
+      #201e1c
+    );
+  border-radius: 90px 90px 0 0;
+  clip-path: polygon(
+    26% 0,
+    40% 10%,
+    60% 10%,
+  )
+}
+</style>
+  <main>
+
+    <section class="hero" id="shop">
+
+      <div class="hero-content">
+
+        <span class="hero-label">
+          <span class="label-dot"></span>
+          NEW SEASON · NEW POSSIBILITIES
+        </span>
+
+        <h1>
+          Everything you want.
+          <span>All in one place.</span>
+        </h1>
+
+        <p class="hero-description">
+          Discover carefully selected fashion, electronics,
+          lifestyle essentials and more — delivered straight
+          to your door.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#categories" class="btn btn-dark">
+            Shop Collection
+            <span class="arrow">→</span>
+          </a>
+
+          <a href="#categories" class="btn btn-light">
+            Explore Categories
+          </a>
+
+        </div>
+
+        <div class="hero-trust">
+
+          <div class="trust-item">
+            <strong>50K+</strong>
+            <span>Products</span>
+          </div>
+
+          <div class="trust-item">
+            <strong>25K+</strong>
+            <span>Happy Customers</span>
+          </div>
+
+          <div class="trust-item">
+            <strong>4.9/5</strong>
+            <span>Customer Rating</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Hero Visual -->
+      <div class="hero-visual">
+
+        <div class="hero-image-main">
+
+          <!-- Decorative shapes -->
+          <div class="shape shape-one"></div>
+          <div class="shape shape-two"></div>
+
+          <!-- Rating Card -->
+          <div class="floating-card card-one">
+            <span class="stars">★★★★★</span>
+            <strong>Loved by thousands</strong>
+          </div>
+
+          <!-- Deal Card -->
+          <div class="floating-card card-two">
+            <small>Today's Deal</small>
+            <strong>Up to 40% OFF</strong>
+          </div>
+
+
+          <!-- Main Model -->
+          <div class="hero-model">
+
+            <div class="model-circle"></div>
+
+            <div class="model-head"></div>
+
+            <div class="model-body">
+
+              <div class="model-neck"></div>
+
+              <div class="model-shirt">
+                <span></span>
+              </div>
+
+              <div class="model-arm arm-left"></div>
+              <div class="model-arm arm-right"></div>
+
+            </div>
+
+
+            <!-- Product Showcase -->
+            <div class="product-showcase">
+
+              <div class="product-bag">
+                <div class="bag-handle"></div>
+                <div class="bag-logo">E</div>
+              </div>
+
+              <div class="product-bottle">
+                <div class="bottle-cap"></div>
+                <div class="bottle-label">EVERY<br>DAY</div>
+              </div>
+
+              <div class="product-box">
+                <div class="box-top"></div>
+                <span>ESSENTIALS</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <span class="section-label">EXPLORE</span>
+            <h2>Shop by category</h2>
+          </div>
+
+          <a href="#shop" class="view-all">
+            View all <span>→</span>
+          </a>
+        </div>
+
+
+        <div class="category-grid">
+
+          <a href="#" class="category-card category-fashion">
+            <div class="category-icon">✦</div>
+            <div>
+              <h3>Fashion</h3>
+              <p>Latest styles & essentials</p>
+            </div>
+            <span class="category-arrow">↗</span>
+          </a>
+
+          <a href="#" class="category-card category-tech">
+            <div class="category-icon">◉</div>
+            <div>
+              <h3>Electronics</h3>
+              <p>Smart tech for everyday life</p>
+            </div>
+            <span class="category-arrow">↗</span>
+          </a>
+
+          <a href="#" class="category-card category-home">
+            <div class="category-icon">⌂</div>
+            <div>
+              <h3>Home & Living</h3>
+              <p>Make your space beautiful</p>
+            </div>
+            <span class="category-arrow">↗</span>
+          </a>
+
+          <a href="#" class="category-card category-beauty">
+            <div class="category-icon">✧</div>
+            <div>
+              <h3>Beauty</h3>
+              <p>Feel good, look good</p>
+            </div>
+            <span class="category-arrow">↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Deals -->
+    <section class="deal-section" id="deals">
+
+      <div class="container deal-container">
+
+        <div>
+          <span class="section-label">LIMITED TIME</span>
+          <h2>Special deals.<br>Special prices.</h2>
+          <p>
+            Save more on products you'll love.
+            New deals added every day.
+          </p>
+
+          <button class="btn btn-dark deal-btn" id="dealBtn">
+            Explore Deals
+            <span>→</span>
+          </button>
+        </div>
+
+        <div class="deal-number">
+          <span>UP TO</span>
+          <strong>40%</strong>
+          <span>OFF</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about" id="about">
+
+      <div class="container about-content">
+
+        <span class="section-label">WHY EVERYTHING?</span>
+
+        <h2>
+          One destination.<br>
+          <em>Endless possibilities.</em>
+        </h2>
+
+        <p>
+          We bring together the things you love, from everyday
+          essentials to exciting discoveries, making online
+          shopping simple, enjoyable and convenient.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <a href="#" class="logo">
+        <span class="logo-mark">E</span>
+        <span>EVERYTHING</span>
+      </a>
+
+      <p>© 2026 Everything Store. All rights reserved.</p>
+
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+
+    <div class="search-box">
+
+      <button class="close-search" id="closeSearch">
+        ×
+      </button>
+
+      <span>SEARCH THE STORE</span>
+
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="What are you looking for?"
+        autocomplete="off"
+      >
+
+      <p>Try searching for fashion, electronics, beauty...</p>
+
+    </div>
+
+  </div>
+
+
+  <!-- Cart Notification -->
+  <div class="toast" id="toast">
+    <span>✓</span>
+    <p>Welcome to Everything Store!</p>
+  </div>
+{% endblock  %}

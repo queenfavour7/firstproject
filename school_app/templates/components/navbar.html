@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        :root {
+            --nav-bg: #ffffff;
+            --nav-text: #111827;
+            --nav-muted: #6b7280;
+            --nav-border: #e5e7eb;
+            --nav-accent: #111827;
+            --nav-hover: #f3f4f6;
+            --nav-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--nav-border);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            height: 78px;
+            margin: 0 auto;
+            padding: 0 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--nav-text);
+            text-decoration: none;
+
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            background: #111827;
+            color: white;
+
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        .navbar-search {
+            flex: 1;
+            max-width: 560px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+
+            background: #f7f7f8;
+            border: 1px solid transparent;
+            border-radius: 50px;
+
+            transition: 0.25s ease;
+        }
+
+        .navbar-search:focus-within {
+            background: #fff;
+            border-color: #d1d5db;
+            box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.05);
+        }
+
+        .navbar-search input {
+            width: 100%;
+            height: 100%;
+
+            padding: 0 20px;
+
+            border: 0;
+            outline: 0;
+            background: transparent;
+
+            color: #111827;
+            font-size: 0.92rem;
+        }
+
+        .navbar-search button {
+            width: 45px;
+            height: 45px;
+
+            display: grid;
+            place-items: center;
+
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .navbar-search svg {
+            width: 20px;
+            height: 20px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-action {
+            position: relative;
+
+            min-width: 65px;
+            padding: 7px 9px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+
+            color: var(--nav-text);
+            text-decoration: none;
+
+            border-radius: var(--nav-radius);
+
+            font-size: 0.72rem;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .nav-action:hover {
+            background: var(--nav-hover);
+        }
+
+        .nav-action svg {
+            width: 21px;
+            height: 21px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.7;
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: 0;
+            right: 5px;
+
+            min-width: 17px;
+            height: 17px;
+
+            display: grid;
+            place-items: center;
+
+            padding: 0 4px;
+
+            background: #ef4444;
+            color: #fff;
+
+            border-radius: 50px;
+
+            font-size: 0.62rem;
+        }
+
+        .navbar-menu {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 42px;
+
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .navbar-menu a {
+            position: relative;
+
+            color: #4b5563;
+            text-decoration: none;
+
+            font-size: 0.84rem;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .navbar-menu a:hover {
+            color: #111827;
+        }
+
+        .navbar-menu a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+
+            width: 0;
+            height: 2px;
+
+            background: #111827;
+
+            transition: width 0.2s ease;
+        }
+
+        .navbar-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: #f3f4f6;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+
+            width: 20px;
+            height: 2px;
+
+            margin: 4px auto;
+
+            background: #111827;
+
+            transition: 0.2s ease;
+        }
+
+        @media (max-width: 900px) {
+            .navbar-container {
+                padding: 0 20px;
+            }
+
+            .navbar-search {
+                max-width: 350px;
+            }
+
+            .account-action {
+                display: none;
+            }
+
+            .navbar-menu {
+                gap: 22px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar-container {
+                height: 68px;
+                padding: 0 16px;
+                gap: 10px;
+            }
+
+            .navbar-logo {
+                font-size: 1rem;
+            }
+
+            .logo-icon {
+                width: 30px;
+                height: 30px;
+            }
+
+            .navbar-search {
+                display: none;
+            }
+
+            .wishlist-action,
+            .account-action {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .navbar-menu {
+                display: none;
+
+                height: auto;
+                padding: 15px 20px;
+
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 18px;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+        }
+    </style>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+
+            <a href="/" class="navbar-logo">
+                <span class="logo-icon">◆</span>
+                <span>SHOPORA</span>
+            </a>
+
+            <div class="navbar-search">
+                <input type="search" id="navbarSearch" placeholder="Search products..." aria-label="Search products" />
+                <button type="button" id="searchBtn" aria-label="Search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="M16.5 16.5L21 21"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="navbar-actions">
+
+                <a href="#" class="nav-action account-action">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 21c.8-4 3.5-6 8-6s7.2 2 8 6"></path>
+                    </svg>
+                    <span>Account</span>
+                </a>
+
+                <a href="#" class="nav-action wishlist-action">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M20.8 8.8c0 5.4-8.8 10.2-8.8 10.2S3.2 14.2 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z">
+                        </path>
+                    </svg>
+                    <span>Wishlist</span>
+                    <b class="nav-badge">0</b>
+                </a>
+
+                <a href="#" class="nav-action cart-action">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6"></path>
+                        <circle cx="10" cy="20" r="1"></circle>
+                        <circle cx="18" cy="20" r="1"></circle>
+                    </svg>
+                    <span>Cart</span>
+                    <b class="nav-badge">0</b>
+                </a>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="#shop">Shop</a>
+            <a href="#categories">Categories</a>
+            <a href="#deals">Deals</a>
+            <a href="#new-arrivals">New Arrivals</a>
+            <a href="#best-sellers">Best Sellers</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuButton = document.getElementById("mobileMenuBtn");
+            const menu = document.getElementById("navbarMenu");
+            const searchButton = document.getElementById("searchBtn");
+            const searchInput = document.getElementById("navbarSearch");
+
+            // Mobile menu
+            if (menuButton && menu) {
+                menuButton.addEventListener("click", () => {
+                    menu.classList.toggle("active");
+                });
+            }
+
+            // Search
+            if (searchButton && searchInput) {
+                searchButton.addEventListener("click", performSearch);
+
+                searchInput.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter") {
+                        performSearch();
+                    }
+                });
+            }
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+
+                if (!query) {
+                    searchInput.focus();
+                    return;
+                }
+
+                console.log("Searching for:", query);
+
+                // Replace this with your actual search page.
+                window.location.href =
+                    `search.html?q=${encodeURIComponent(query)}`;
+            }
+
+            // Close mobile menu after clicking a link
+            document.querySelectorAll(".navbar-menu a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    menu?.classList.remove("active");
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

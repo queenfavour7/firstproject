@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .site-footer {
+  background: #111827;
+  color: #fff;
+}
+
+.footer-main {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  padding: 75px 32px 55px;
+
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+  gap: 45px;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #fff;
+  text-decoration: none;
+
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.footer-brand p {
+  max-width: 300px;
+
+  margin: 20px 0;
+
+  color: #9ca3af;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  background: #fff;
+  color: #111827;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 9px;
+}
+
+.footer-socials a {
+  width: 35px;
+  height: 35px;
+
+  display: grid;
+  place-items: center;
+
+  color: #fff;
+  background: #1f2937;
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.footer-socials a:hover {
+  background: #fff;
+  color: #111827;
+  transform: translateY(-2px);
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-column h3,
+.footer-newsletter h3 {
+  margin: 0 0 10px;
+
+  color: #fff;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.footer-column a {
+  color: #9ca3af;
+  text-decoration: none;
+
+  font-size: 0.85rem;
+
+  transition: 0.2s ease;
+}
+
+.footer-column a:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.footer-newsletter p {
+  margin: 0 0 18px;
+
+  color: #9ca3af;
+
+  line-height: 1.6;
+  font-size: 0.85rem;
+}
+
+.newsletter-form {
+  display: flex;
+
+  padding: 4px;
+
+  background: #1f2937;
+
+  border: 1px solid #374151;
+  border-radius: 9px;
+}
+
+.newsletter-form input {
+  width: 100%;
+  min-width: 0;
+
+  padding: 11px;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+  color: #fff;
+
+  font-size: 0.8rem;
+}
+
+.newsletter-form input::placeholder {
+  color: #6b7280;
+}
+
+.newsletter-form button {
+  padding: 0 15px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #111827;
+
+  font-weight: 700;
+  font-size: 0.75rem;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.newsletter-form button:hover {
+  background: #e5e7eb;
+}
+
+#newsletterMessage {
+  display: block;
+  margin-top: 10px;
+  color: #86efac;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  padding: 22px 32px;
+
+  border-top: 1px solid #1f2937;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-bottom p {
+  margin: 0;
+
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 7px;
+}
+
+.payment-methods span {
+  padding: 6px 9px;
+
+  background: #1f2937;
+  border-radius: 5px;
+
+  color: #9ca3af;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+@media (max-width: 1050px) {
+  .footer-main {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+
+  .footer-newsletter {
+    grid-column: 1 / -1;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 700px) {
+  .footer-main {
+    padding: 55px 20px 40px;
+
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 25px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-newsletter {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    padding: 20px;
+
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 450px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand,
+  .footer-newsletter {
+    grid-column: auto;
+  }
+}
+    </style>
+    <footer class="site-footer" id="contact">
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        <span class="logo-icon">◆</span>
+        SHOPORA
+      </a>
+
+      <p>
+        Discover products you'll love. Shop confidently with
+        fast delivery, secure payments, and excellent customer service.
+      </p>
+
+      <div class="footer-socials">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">ig</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="TikTok">tk</a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h3>Shop</h3>
+      <a href="#">All Products</a>
+      <a href="#">New Arrivals</a>
+      <a href="#">Best Sellers</a>
+      <a href="#">Deals & Offers</a>
+      <a href="#">Gift Cards</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Customer Care</h3>
+      <a href="#">Contact Us</a>
+      <a href="#">FAQs</a>
+      <a href="#">Shipping & Delivery</a>
+      <a href="#">Returns & Refunds</a>
+      <a href="#">Track Order</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>About</h3>
+      <a href="#">Our Story</a>
+      <a href="#">Careers</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Become a Seller</a>
+    </div>
+
+    <div class="footer-newsletter">
+      <h3>Stay in the loop</h3>
+
+      <p>
+        Subscribe for new arrivals, exclusive offers, and special discounts.
+      </p>
+
+      <form id="newsletterForm" class="newsletter-form">
+        <input
+          type="email"
+          id="newsletterEmail"
+          placeholder="Your email address"
+          required
+        />
+
+        <button type="submit">
+          Subscribe
+        </button>
+      </form>
+
+      <small id="newsletterMessage"></small>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      © <span id="footerYear"></span> Shopora. All rights reserved.
+    </p>
+
+    <div class="payment-methods">
+      <span>VISA</span>
+      <span>MC</span>
+      <span>AMEX</span>
+      <span>PAY</span>
+    </div>
+  </div>
+
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+  // Current year
+  const yearElement = document.getElementById("footerYear");
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Newsletter
+  const newsletterForm = document.getElementById("newsletterForm");
+  const newsletterEmail = document.getElementById("newsletterEmail");
+  const newsletterMessage =
+    document.getElementById("newsletterMessage");
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const email = newsletterEmail.value.trim();
+
+      if (!email) {
+        return;
+      }
+
+      newsletterMessage.textContent =
+        "Thanks! You're now subscribed.";
+
+      newsletterForm.reset();
+    });
+  }
+
+});
+</script>
+</body>
+</html>
